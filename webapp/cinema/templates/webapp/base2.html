@@ -1,0 +1,21 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<a href="#" id="ajax-text-me">Натисни мене ніжно</a>
+<div id="more-text-here1"></div>
+<div id="more-text-here2"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#now").click(function() {
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/ajax/',
+                data: "param1=value1",
+                success: function(data) {
+                    $("#ajax").append(data['html']);
+
+                },
+                dataType: 'json',
+            });
+        });
+    });
+</script>

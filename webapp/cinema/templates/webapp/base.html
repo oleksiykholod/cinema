@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Славік хуй</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body class="bg-dar">
+      <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="list-group bg-dark overflow-auto" id="block">
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white" id ='now'><h1>Зараз дивляться</h1></a>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white" id="news"><h1>Новинки</h1></a>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white" id='films'><h1>Фільми</h1></a>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white" id="serials"><h1>Серіали</h1></a>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white" id='myltfilms'><h1>Мультфільми</h1></a>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white" id="tele"><h1>Телепередачі</h1></a>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white" id="anime"><h1>Аніме</h1></a>
+          <br/>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><h1>Закладки</h1></a>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><h1>Історія</h1></a>
+          <br/>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><h1>Настойки</h1></a>
+          <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><h1>Про нас</h1></a>
+        </div>
+      </div>
+      <nav class="navbar navbar-expand-lg bg-success">
+        <div class="container-fluid">
+            <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <img src="{% static 'images/ic_drawer.png' %}"/>
+              </button>
+          <a class="navbar-brand text-white" href="#" id="navtxt"><h1></h1></a>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+  
+  <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    
+      <div >
+        <br/>
+        <div class="row" id = 'ajax'>
+        </div>
+      </div>
+  
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" scrossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $("#now").click(function() {
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/now/',
+                data: "param1=value1;",
+                success: function(data) {
+                    $('#navtxt').html($("#now").text());
+                    $("#block").children().removeClass();
+                    $("#block").children().addClass('list-group-item list-group-item-action bg-dark text-white');
+                    $("#now").removeClass();
+                    $("#now").addClass('list-group-item list-group-item-action bg-success text-white');
+                    $('#ajax').children().remove()
+                    $("#ajax").append(data['html']);
+
+                },
+                dataType: 'json',
+            });
+        });
+        $("#news").click(function() {
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/news/',
+                data: "param1=value1;",
+                success: function(data) {
+                    $('#navtxt').html($("#news").text());
+                    $("#block").children().removeClass();
+                    $("#block").children().addClass('list-group-item list-group-item-action bg-dark text-white');
+                    $("#news").removeClass();
+                    $("#news").addClass('list-group-item list-group-item-action bg-success text-white');
+                    $('#ajax').children().remove()
+                    $("#ajax").append(data['html']);
+
+                },
+                dataType: 'json',
+            });
+        });
+        $("#films").click(function() {
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/films/',
+                data: "param1=value1;",
+                success: function(data) {
+                    $('#navtxt').html($("#films").text());
+                    $("#block").children().removeClass();
+                    $("#block").children().addClass('list-group-item list-group-item-action bg-dark text-white');
+                    $("#films").removeClass();
+                    $("#films").addClass('list-group-item list-group-item-action bg-success text-white');
+                    $('#ajax').children().remove()
+                    $("#ajax").append(data['html']);
+
+                },
+                dataType: 'json',
+            });
+        });
+        $("#serials").click(function() {
+            $('#navtxt').html($(this).text());
+            $("#block").children().removeClass();
+            $("#block").children().addClass('list-group-item list-group-item-action bg-dark text-white');
+            $(this).removeClass();
+            $(this).addClass('list-group-item list-group-item-action bg-success text-white');
+            $('#ajax').children().remove()
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/serials/',
+                data: "param1=value1;",
+                success: function(data) {
+                    $("#ajax").append(data['html']);
+
+                },
+                dataType: 'json',
+            });
+        });
+        $("#myltfilms").click(function() {
+            $('#navtxt').html($("#myltfilms").text());
+            $("#block").children().removeClass();
+            $("#block").children().addClass('list-group-item list-group-item-action bg-dark text-white');
+            $("#myltfilms").removeClass();
+            $("#myltfilms").addClass('list-group-item list-group-item-action bg-success text-white');
+            $('#ajax').children().remove()
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/myltfilms/',
+                data: "param1=value1;",
+                success: function(data) {
+                    $("#ajax").append(data['html']);
+
+                },
+                dataType: 'json',
+            });
+        });
+        $("#tele").click(function() {
+            $('#navtxt').html($("#tele").text());
+            $("#block").children().removeClass();
+            $("#block").children().addClass('list-group-item list-group-item-action bg-dark text-white');
+            $("#tele").removeClass();
+            $("#tele").addClass('list-group-item list-group-item-action bg-success text-white');
+            $('#ajax').children().remove();
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/tele/',
+                data: "param1=value1;",
+                success: function(data) {
+                    $("#ajax").append(data['html']);
+
+                },
+                dataType: 'json',
+            });
+        });
+        $("#anime").click(function() {
+            $('#navtxt').html($("#anime").text());
+            $("#block").children().removeClass();
+            $("#block").children().addClass('list-group-item list-group-item-action bg-dark text-white');
+            $("#anime").removeClass();
+            $("#anime").addClass('list-group-item list-group-item-action bg-success text-white');
+            $('#ajax').children().remove();
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/anime/',
+                data: "param1=value1;",
+                success: function(data) {
+                    $("#ajax").append(data['html']);
+
+                },
+                dataType: 'json',
+            });
+        });
+    });
+    </script>
+</html>
+
+ 
+
+
+
+
+
+

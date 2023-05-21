@@ -1,0 +1,32 @@
+{% block content %}
+  {% for name, info, img, url, id in obj %}
+    <div class="col">
+      <a style="text-decoration: none; color: white;" href="#" id="l{{ id }}" name="{{url}}"
+       class = 'xax' data-bs-toggle="modal" data-bs-target="#exampleModal" 
+       onclick='
+       a = document.querySelector("#modal-title");
+       a.setHTML(this.querySelector("h6").textContent);
+       b = this["name"]
+       a.setAttribute("name",b)
+        $.ajax({
+            type: "GET",
+            async: true,
+            url: "/ajax/",
+            data: "p1="+b,
+            success: function(data) {
+              $("#modal").append(data["html"])
+            },
+            dataType: "json",
+        });'>
+        <div  class = container style="width: 200px;height: 350px; background-color: black;padding: 20px; margin-top: 10px;border-radius: 30px;" >
+          <img class='img' width="100%" height="75%" src="{{ img }}"/>
+          <div>
+            <h6>{{ name }}</h6>
+            <p>{{ info }}</p>
+          </div>
+          <br/>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+{% endblock %}

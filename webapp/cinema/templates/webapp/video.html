@@ -1,0 +1,27 @@
+{% block content %}
+    {% for lang, langid, lv in objc %}
+        <button type="button" class="btn btn-success" id="{{ urlz }}" name="{{ langid }}" lvalue='{{ lv }}' value="{{ typec }}" onclick='
+
+        $("#modal").empty();
+        b = this["name"];
+        c = this["id"]
+        k = this["lvalue"]
+        if(this["value"] === "film"){        
+            $.ajax({
+            type: "GET",
+            async: true,
+            url: "/film/",
+            data: {
+        ozv: b,
+        url: c,
+        lv: k
+    },
+            success: function(data) {
+              $("#modal").append(data["html"])
+            },
+            dataType: "json",
+        });
+    }
+        '>{{ lang }}</button>
+    {% endfor %}
+{% endblock %}
